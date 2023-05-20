@@ -1,0 +1,43 @@
+11
+import math
+import time
+
+def recursive_F(n):
+    if n < 2:
+        return 23
+    else:
+        if n-5 >= 0:
+            return 5 * recursive_F(n-1) // math.factorial(n-5)
+        else:
+            return 5 * recursive_F(n-1)
+
+def iterative_F(n):
+    result = 23
+    for i in range(3, n+1):
+        if i-5 >= 0:
+            result = 5 * result // math.factorial(i-5)
+        else:
+            result = 5 * result
+    return result
+
+# Сравнение времени выполнения
+n_values = [10, 20, 30, 40, 50]
+execution_times_recursive = []
+execution_times_iterative = []
+
+for n in n_values:
+    start_time = time.time()
+    recursive_F(n)
+    end_time = time.time()
+    execution_times_recursive.append(end_time - start_time)
+
+    start_time = time.time()
+    iterative_F(n)
+    end_time = time.time()
+    execution_times_iterative.append(end_time - start_time)
+
+# Вывод результатов
+print("N\tRecursive\tIterative")
+print("-------------------------")
+for i in range(len(n_values)):
+    print("{}\t{:.6f}\t{:.6f}".format(n_values[i], execution_times_recursive[i], execution_times_iterative[i]))
