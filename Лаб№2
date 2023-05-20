@@ -1,0 +1,68 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+// Функция для проверки, является ли число нечетным восьмиричным и имеет вторую справа цифру равную 7
+bool isMatchingNumber(int number) {
+    if (number % 2 != 0 && number / 10 % 10 == 7) {
+        return true;
+    }
+    return false;
+}
+
+// Функция для вывода цифр числа, исключая семерки
+void printDigits(int number) {
+    std::vector<int> digits;
+    while (number > 0) {
+        int digit = number % 10;
+        if (digit != 7) {
+            digits.push_back(digit);
+        }
+        number /= 10;
+    }
+
+    std::reverse(digits.begin(), digits.end());
+
+    for (int digit : digits) {
+        std::cout << digit << " ";
+    }
+    std::cout << std::endl;
+}
+
+// Функция для определения прописью среднего числа между минимальным и максимальным
+std::string getSpelledMiddleNumber(int minNumber, int maxNumber) {
+    int middleNumber = (minNumber + maxNumber) / 2;
+
+    // Здесь можно реализовать преобразование числа в пропись по своему усмотрению
+    // В данном примере просто выводим число в виде строки
+
+    return std::to_string(middleNumber);
+}
+
+int main() {
+    const int limit = 4096;
+    int minNumber = limit;
+    int maxNumber = 0;
+    int sum = 0;
+    int count = 0;
+
+    for (int i = 1; i <= limit; i += 2) {
+        if (isMatchingNumber(i)) {
+            minNumber = std::min(minNumber, i);
+            maxNumber = std::max(maxNumber, i);
+            sum += i;
+            count++;
+            printDigits(i);
+        }
+    }
+
+    if (count > 0) {
+        double average = static_cast<double>(sum) / count;
+        std::string spelledMiddleNumber = getSpelledMiddleNumber(minNumber, maxNumber);
+
+        std::cout << "Average: " << average << std::endl;
+        std::cout << "Spelled middle number: " << spelledMiddleNumber << std::endl;
+    }
+
+    return 0;
+}
