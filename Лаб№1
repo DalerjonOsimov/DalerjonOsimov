@@ -1,0 +1,9 @@
+- def average_of_min_max():
+    numbers = [1101, 1131, 1151, 1171, 1191, 1211, 1311, 1411, 1511, 1611, 1711, 1811, 1911, 2021]
+    min_num = min(numbers)
+    max_num = max(numbers)
+    average = (min_num + max_num) / 2
+    return average
+
+average = average_of_min_max()
+print("The average of the minimum and maximum is", average)
